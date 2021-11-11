@@ -43,7 +43,13 @@
 #define taskENTER_CRITICAL                   dummyTaskENTER_CRITICAL
 #define taskEXIT_CRITICAL                    dummyTaskEXIT_CRITICAL
 
-#define PlatformEventGroupHandle_t           uint16_t
+typedef struct MockPlatformEventGroup
+{
+    uint32_t dummy;
+} MockPlatformEventGroup_t;
+typedef struct   MockPlatformEventGroup_t       * MockPlatformEventGroupHandle_t;
+
+#define PlatformEventGroupHandle_t           MockPlatformEventGroupHandle_t
 #define PlatformEventGroup_Delete            MockPlatformEventGroup_Delete
 #define PlatformEventGroup_ClearBits         MockPlatformEventGroup_ClearBits
 #define PlatformEventGroup_Create            MockPlatformEventGroup_Create
