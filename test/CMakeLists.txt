@@ -38,6 +38,7 @@ set( CELLULAR_COMMON_INCLUDE_DIRS ${CELLULAR_INCLUDE_DIRS}/common )
 set( CELLULAR_COMMON_INCLUDE_PRIVATE_DIRS ${CELLULAR_INCLUDE_DIRS}/private )
 set( CELLULAR_INTERFACE_INCLUDE_DIRS ${CELLULAR_COMMON_SOURCE}/interface )
 set( CELLULAR_TEST_DIRS ${MODULE_ROOT_DIR}/test/unit-test )
+set( CELLULAR_LOGGING_DIRS ${MODULE_ROOT_DIR}/test/unit-test/logging )
 
 # Target for Coverity analysis that builds the library.
 add_library( coverity_analysis
@@ -50,16 +51,34 @@ add_library( coverity_analysis
              ${CELLULAR_COMMON_SOURCE}/cellular_pktio.c )
 
 # Build Cellular library target without custom config dependency.
-target_compile_definitions( coverity_analysis PUBLIC CELLULAR_DO_NOT_USE_CUSTOM_CONFIG=1 )
+# target_compile_definitions( coverity_analysis PUBLIC CELLULAR_DO_NOT_USE_CUSTOM_CONFIG=1 )
 
 # Cellular include path.
-target_include_directories( coverity_analysis PUBLIC ${CELLULAR_COMMON_INCLUDE_DIRS} ${CELLULAR_INCLUDE_DIRS} ${CELLULAR_INTERFACE_INCLUDE_DIRS} ${CELLULAR_TEST_DIRS})
+target_include_directories( coverity_analysis PUBLIC
+                                                ${CELLULAR_COMMON_INCLUDE_DIRS}
+                                                ${CELLULAR_INCLUDE_DIRS}
+                                                ${CELLULAR_INTERFACE_INCLUDE_DIRS}
+                                                ${CELLULAR_TEST_DIRS} 
+                                                ${CELLULAR_LOGGING_DIRS} )
 
 # Cellular private include path.
 target_include_directories( coverity_analysis PRIVATE ${CELLULAR_COMMON_INCLUDE_PRIVATE_DIRS} )
 
 # Build without debug enabled when performing static analysis
 target_compile_options(coverity_analysis PUBLIC -DNDEBUG )
+
+target_compile_options(coverity_analysis PUBLIC
+    ### Gnu/Clang C Options
+    $<$<COMPILE_LANG_AND_ID:C,GNU>:-fdiagnostics-color=always>
+    $<$<COMPILE_LANG_AND_ID:C,Clang>:-fcolor-diagnostics>
+
+    $<$<COMPILE_LANG_AND_ID:C,Clang,GNU>:-Wall>
+    $<$<COMPILE_LANG_AND_ID:C,Clang,GNU>:-Wextra>
+    $<$<COMPILE_LANG_AND_ID:C,Clang,GNU>:-Wpedantic>
+    $<$<COMPILE_LANG_AND_ID:C,Clang,GNU>:-Werror>
+    $<$<COMPILE_LANG_AND_ID:C,Clang,GNU>:-Wconversion>
+    $<$<COMPILE_LANG_AND_ID:C,Clang>:-Weverything>
+)
 
 #  ====================================  Test Configuration ========================================
 
