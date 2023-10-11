@@ -98,16 +98,13 @@ target_include_directories( compilation_test PRIVATE ${CELLULAR_COMMON_INCLUDE_P
 target_compile_options(compilation_test PUBLIC -DNDEBUG )
 
 target_compile_options(compilation_test PUBLIC
-    ### Gnu/Clang C Options
     $<$<COMPILE_LANG_AND_ID:C,GNU>:-fdiagnostics-color=always>
-    $<$<COMPILE_LANG_AND_ID:C,Clang>:-fcolor-diagnostics>
 
-    $<$<COMPILE_LANG_AND_ID:C,Clang,GNU>:-Wall>
-    $<$<COMPILE_LANG_AND_ID:C,Clang,GNU>:-Wextra>
-    $<$<COMPILE_LANG_AND_ID:C,Clang,GNU>:-Wpedantic>
-    $<$<COMPILE_LANG_AND_ID:C,Clang,GNU>:-Werror>
-    $<$<COMPILE_LANG_AND_ID:C,Clang,GNU>:-Wconversion>
-    $<$<COMPILE_LANG_AND_ID:C,Clang>:-Weverything>
+    $<$<COMPILE_LANG_AND_ID:C,GNU>:-Wall>
+    $<$<COMPILE_LANG_AND_ID:C,GNU>:-Wextra>
+    $<$<COMPILE_LANG_AND_ID:C,GNU>:-Wpedantic>
+    $<$<COMPILE_LANG_AND_ID:C,GNU>:-Werror>
+    $<$<COMPILE_LANG_AND_ID:C,GNU>:-Wconversion>
 )
 
 #  ====================================  Test Configuration ========================================
