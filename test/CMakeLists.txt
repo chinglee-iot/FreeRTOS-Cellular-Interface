@@ -39,6 +39,8 @@ set( CELLULAR_COMMON_INCLUDE_PRIVATE_DIRS ${CELLULAR_INCLUDE_DIRS}/private )
 set( CELLULAR_INTERFACE_INCLUDE_DIRS ${CELLULAR_COMMON_SOURCE}/interface )
 set( CELLULAR_TEST_DIRS ${MODULE_ROOT_DIR}/test/unit-test )
 set( CELLULAR_LOGGING_DIRS ${MODULE_ROOT_DIR}/test/unit-test/logging )
+set( CELLULAR_UNIT_TEST_CONFIG_DIRS ${MODULE_ROOT_DIR}/test/unit-test/configs/unit-test )
+set( CELLULAR_COMPILATION_CONFIG_DIRS ${MODULE_ROOT_DIR}/test/unit-test/configs/log-format-test )
 
 # Target for Coverity analysis that builds the library.
 add_library( coverity_analysis
@@ -59,7 +61,8 @@ target_include_directories( coverity_analysis PUBLIC
                                                 ${CELLULAR_INCLUDE_DIRS}
                                                 ${CELLULAR_INTERFACE_INCLUDE_DIRS}
                                                 ${CELLULAR_TEST_DIRS} 
-                                                ${CELLULAR_LOGGING_DIRS} )
+                                                ${CELLULAR_LOGGING_DIRS}
+                                                ${CELLULAR_UNIT_TEST_CONFIG_DIRS} )
 
 # Cellular private include path.
 target_include_directories( coverity_analysis PRIVATE ${CELLULAR_COMMON_INCLUDE_PRIVATE_DIRS} )
@@ -67,7 +70,37 @@ target_include_directories( coverity_analysis PRIVATE ${CELLULAR_COMMON_INCLUDE_
 # Build without debug enabled when performing static analysis
 target_compile_options(coverity_analysis PUBLIC -DNDEBUG )
 
-target_compile_options(coverity_analysis PUBLIC
+#  ====================================  Compilation Test Configuration ========================================
+
+# Target for compilation_test that builds the library.
+add_library( compilation_test
+             ${CELLULAR_COMMON_SOURCE}/cellular_at_core.c
+             ${CELLULAR_COMMON_SOURCE}/cellular_common.c
+             ${CELLULAR_COMMON_SOURCE}/cellular_common_api.c
+             ${CELLULAR_COMMON_SOURCE}/cellular_3gpp_urc_handler.c
+             ${CELLULAR_COMMON_SOURCE}/cellular_3gpp_api.c
+             ${CELLULAR_COMMON_SOURCE}/cellular_pkthandler.c
+             ${CELLULAR_COMMON_SOURCE}/cellular_pktio.c )
+
+# Build Cellular library target without custom config dependency.
+# target_compile_definitions( compilation_test PUBLIC CELLULAR_DO_NOT_USE_CUSTOM_CONFIG=1 )
+
+# Cellular include path.
+target_include_directories( compilation_test PUBLIC
+                                                ${CELLULAR_COMMON_INCLUDE_DIRS}
+                                                ${CELLULAR_INCLUDE_DIRS}
+                                                ${CELLULAR_INTERFACE_INCLUDE_DIRS}
+                                                ${CELLULAR_TEST_DIRS}
+                                                ${CELLULAR_LOGGING_DIRS}
+                                                ${CELLULAR_COMPILATION_CONFIG_DIRS} )
+
+# Cellular private include path.
+target_include_directories( compilation_test PRIVATE ${CELLULAR_COMMON_INCLUDE_PRIVATE_DIRS} )
+
+# Build without debug enabled when performing static analysis
+target_compile_options(compilation_test PUBLIC -DNDEBUG )
+
+target_compile_options(compilation_test PUBLIC
     ### Gnu/Clang C Options
     $<$<COMPILE_LANG_AND_ID:C,GNU>:-fdiagnostics-color=always>
     $<$<COMPILE_LANG_AND_ID:C,Clang>:-fcolor-diagnostics>

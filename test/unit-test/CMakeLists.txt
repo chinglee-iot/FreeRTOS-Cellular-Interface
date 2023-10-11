@@ -19,6 +19,7 @@ list(APPEND mock_include_list
             ${CELLULAR_COMMON_INCLUDE_PRIVATE_DIRS}
             ${CELLULAR_INTERFACE_INCLUDE_DIRS}
             ${CELLULAR_INCLUDE_DIRS}
+            ${CELLULAR_UNIT_TEST_CONFIG_DIRS}
         )
 #list the definitions of your mocks to control what to be included
 list(APPEND mock_define_list
@@ -44,6 +45,7 @@ list(APPEND real_include_directories
             ${CELLULAR_INTERFACE_INCLUDE_DIRS}
             ${CELLULAR_COMMON_INCLUDE_DIRS}
             ${CELLULAR_COMMON_INCLUDE_PRIVATE_DIRS}
+            ${CELLULAR_UNIT_TEST_CONFIG_DIRS}
         )
 
 # =====================  Create UnitTest Code here (edit)  =====================
