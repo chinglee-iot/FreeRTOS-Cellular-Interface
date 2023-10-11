@@ -82,9 +82,6 @@ add_library( compilation_test
              ${CELLULAR_COMMON_SOURCE}/cellular_pkthandler.c
              ${CELLULAR_COMMON_SOURCE}/cellular_pktio.c )
 
-# Build Cellular library target without custom config dependency.
-# target_compile_definitions( compilation_test PUBLIC CELLULAR_DO_NOT_USE_CUSTOM_CONFIG=1 )
-
 # Cellular include path.
 target_include_directories( compilation_test PUBLIC
                                                 ${CELLULAR_COMMON_INCLUDE_DIRS}

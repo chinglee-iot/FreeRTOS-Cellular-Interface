@@ -183,5 +183,5 @@ jobs:
       - name: Build ARM GCC project
         shell: bash
         run: |
-          CC=arm-none-eabi-gcc cmake -B build -S . -DCMAKE_C_COMPILER_WORKS=1
+          CC=arm-none-eabi-gcc cmake -B build -S test -DCMAKE_C_COMPILER_WORKS=1
           make -C build -j

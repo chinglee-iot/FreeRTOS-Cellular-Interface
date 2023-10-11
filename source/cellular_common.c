@@ -701,7 +701,7 @@ CellularError_t _Cellular_ConvertCsqSignalRssi( int16_t csqRssi,
         }
         else
         {
-            rssiValue = SIGNAL_QUALITY_CSQ_RSSI_BASE + ( csqRssi * SIGNAL_QUALITY_CSQ_RSSI_STEP );
+            rssiValue = ( int16_t )( SIGNAL_QUALITY_CSQ_RSSI_BASE + ( csqRssi * SIGNAL_QUALITY_CSQ_RSSI_STEP ) );
         }
     }
 
