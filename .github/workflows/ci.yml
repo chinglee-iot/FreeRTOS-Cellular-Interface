@@ -169,3 +169,19 @@ jobs:
         uses: FreeRTOS/CI-CD-Github-Actions/run_cbmc@main
         with:
           proofs_dir: test/cbmc/proofs
+
+  ARM-GCC:
+    name: GNU ARM Toolchain
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install GNU ARM Toolchain
+        shell: bash
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install gcc-arm-none-eabi build-essential cmake git
+
+      - name: Build ARM GCC project
+        shell: bash
+        run: |
+          CC=arm-none-eabi-gcc cmake -B build -S . -DCMAKE_C_COMPILER_WORKS=1
+          make -C build -j
