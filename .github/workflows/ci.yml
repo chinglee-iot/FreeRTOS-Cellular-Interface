@@ -184,6 +184,7 @@ jobs:
 
       - name: Update cellular config
         shell: bash
+        working-directory: ./
         run: |
           echo "#ifndef CELLULAR_CONFIG_H_" > FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
           echo "#define CELLULAR_CONFIG_H_" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
@@ -198,6 +199,7 @@ jobs:
 
       - name: Build ARM GCC project
         shell: bash
+        working-directory: ./
         run: |
           CC=arm-none-eabi-gcc cmake -B build -S test -DCMAKE_C_COMPILER_WORKS=1
           make -C build compilation_test -j
