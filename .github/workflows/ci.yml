@@ -182,7 +182,10 @@ jobs:
           sudo apt-get -y install gcc-arm-none-eabi build-essential cmake git
 
       - name: Update cellular config
+        shell: bash
         run: |
+          pwd
+          ls
           echo "#ifndef CELLULAR_CONFIG_H_" > FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
           echo "#define CELLULAR_CONFIG_H_" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
           echo "#include \"logging_levels.h\"" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
@@ -195,6 +198,7 @@ jobs:
           echo "#endif" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
 
       - name: Build ARM GCC project
+        shell: bash
         run: |
           CC=arm-none-eabi-gcc cmake -B build -S test -DCMAKE_C_COMPILER_WORKS=1
           make -C build compilation_test -j
