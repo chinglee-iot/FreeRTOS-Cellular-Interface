@@ -176,12 +176,27 @@ jobs:
     steps:
       - name: Install GNU ARM Toolchain
         shell: bash
+        working-directory: ./
         run: |
           sudo apt-get -y update
           sudo apt-get -y install gcc-arm-none-eabi build-essential cmake git
+
+      - name: Update cellular config
+        shell: bash
+        run: |
+          echo "#ifndef CELLULAR_CONFIG_H_" > ./test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#define CELLULAR_CONFIG_H_" >> ./test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#include \"logging_levels.h\"" >> ./test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#define LIBRARY_LOG_NAME    \"Cellular\"" >> ./test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#define LIBRARY_LOG_LEVEL    LOG_DEBUG" >> ./test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#include \"logging_stack.h\"" >> ./test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#define CELLULAR_LOG_FMT_UINT32     \"lu\"" >> ./test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#define CELLULAR_LOG_FMT_SIZE       \"u\"" >> ./test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#define CELLULAR_LOG_FMT_INT32      \"ld\"" >> ./test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#endif" >> ./test/unit-test/configs/compilation_test/cellular_config.h
 
       - name: Build ARM GCC project
         shell: bash
         run: |
           CC=arm-none-eabi-gcc cmake -B build -S test -DCMAKE_C_COMPILER_WORKS=1
-          make -C build -j
+          make -C build compilation_test -j
