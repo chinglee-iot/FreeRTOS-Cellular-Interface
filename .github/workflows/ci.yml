@@ -177,14 +177,11 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install GNU ARM Toolchain
         shell: bash
-        working-directory: ./
         run: |
           sudo apt-get -y update
           sudo apt-get -y install gcc-arm-none-eabi build-essential cmake git
 
       - name: Update cellular config
-        shell: bash
-        working-directory: ./
         run: |
           echo "#ifndef CELLULAR_CONFIG_H_" > FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
           echo "#define CELLULAR_CONFIG_H_" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
@@ -198,8 +195,6 @@ jobs:
           echo "#endif" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
 
       - name: Build ARM GCC project
-        shell: bash
-        working-directory: ./
         run: |
           CC=arm-none-eabi-gcc cmake -B build -S test -DCMAKE_C_COMPILER_WORKS=1
           make -C build compilation_test -j
