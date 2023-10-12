@@ -33,8 +33,6 @@
 #ifndef CELLULAR_CONFIG_H_
 #define CELLULAR_CONFIG_H_
 
-#include <stdint.h>
-
 /**************************************************/
 /******* DO NOT CHANGE the following order ********/
 /**************************************************/
@@ -61,36 +59,5 @@
 
 /* This is a project specific file and is used to override config values defined
  * in cellular_config_defaults.h. */
-
-
-/*
- * PDN context id for cellular network.
- */
-#define CELLULAR_PDN_CONTEXT_ID         ( CELLULAR_PDN_CONTEXT_ID_MIN )
-
-/*
- * PDN connect timeout for network registration.
- */
-#define CELLULAR_PDN_CONNECT_TIMEOUT    ( 100000UL )
-
-/*
- * Overwrite default config for different cellular modules.
- */
-
-/*
- * GetHostByName API is not used in the demo. IP address is used to store the hostname.
- * The value should be longer than the length of democonfigMQTT_BROKER_ENDPOINT in demo_config.h.
- */
-#define CELLULAR_IP_ADDRESS_MAX_SIZE    ( 64U )
-
-/* Macro MOCK_LIB_TEST will be defined in test\unit-test\CMakeLists.txt for mock library.*/
-#ifdef MOCK_LIB_TEST
-    typedef struct CellularContext
-    {
-        int test1;
-        int test2;
-        int test3;
-    } CellularContext_t;
-#endif
 
 #endif /* __CELLULAR_CONFIG_H__ */
