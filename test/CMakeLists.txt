@@ -40,7 +40,7 @@ set( CELLULAR_INTERFACE_INCLUDE_DIRS ${CELLULAR_COMMON_SOURCE}/interface )
 set( CELLULAR_TEST_DIRS ${MODULE_ROOT_DIR}/test/unit-test )
 set( CELLULAR_LOGGING_DIRS ${MODULE_ROOT_DIR}/test/unit-test/logging )
 set( CELLULAR_UNIT_TEST_CONFIG_DIRS ${MODULE_ROOT_DIR}/test/unit-test/configs/unit-test )
-set( CELLULAR_COMPILATION_CONFIG_DIRS ${MODULE_ROOT_DIR}/test/unit-test/configs/log-format-test )
+set( CELLULAR_COMPILATION_CONFIG_DIRS ${MODULE_ROOT_DIR}/test/unit-test/configs/compilation-test )
 
 # Target for Coverity analysis that builds the library.
 add_library( coverity_analysis
