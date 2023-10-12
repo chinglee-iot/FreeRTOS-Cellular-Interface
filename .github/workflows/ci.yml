@@ -184,18 +184,16 @@ jobs:
       - name: Update cellular config
         shell: bash
         run: |
-          pwd
-          ls
-          echo "#ifndef CELLULAR_CONFIG_H_" > FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
-          echo "#define CELLULAR_CONFIG_H_" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
-          echo "#include \"logging_levels.h\"" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
-          echo "#define LIBRARY_LOG_NAME    \"Cellular\"" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
-          echo "#define LIBRARY_LOG_LEVEL    LOG_DEBUG" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
-          echo "#include \"logging_stack.h\"" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
-          echo "#define CELLULAR_LOG_FMT_UINT32     \"lu\"" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
-          echo "#define CELLULAR_LOG_FMT_SIZE       \"u\"" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
-          echo "#define CELLULAR_LOG_FMT_INT32      \"ld\"" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
-          echo "#endif" >> FreeRTOS-Cellular-Interface/test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#ifndef CELLULAR_CONFIG_H_" > test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#define CELLULAR_CONFIG_H_" >> test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#include \"logging_levels.h\"" >> test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#define LIBRARY_LOG_NAME    \"Cellular\"" >> test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#define LIBRARY_LOG_LEVEL    LOG_DEBUG" >> test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#include \"logging_stack.h\"" >> test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#define CELLULAR_LOG_FMT_UINT32     \"lu\"" >> test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#define CELLULAR_LOG_FMT_SIZE       \"u\"" >> test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#define CELLULAR_LOG_FMT_INT32      \"ld\"" >> test/unit-test/configs/compilation_test/cellular_config.h
+          echo "#endif" >> test/unit-test/configs/compilation_test/cellular_config.h
 
       - name: Build ARM GCC project
         shell: bash
